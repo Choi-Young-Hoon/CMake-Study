@@ -20,3 +20,7 @@ PUBLIC
 # hello2는 lib/hello2/CMakeLists.txt의 프로젝트 명이다. hello2의 라이브러리를 링크
 target_link_libraries(${PROJECT_NAME}  hello2)
 
+# 최상위 폴더로 복사한다.
+add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
+    COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_FILE:${PROJECT_NAME}> ${CMAKE_SOURCE_DIR}/${PROJECT_NAME}
+    COMMENT "빌드 완료 후에 생성된 mainapp 파일을 최상위 폴더로 복사")
